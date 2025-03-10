@@ -1,0 +1,12 @@
+<!--<p>add-product works!</p>-->
+<h2>Add Product</h2>
+<form (ngSubmit)="addProduct()">
+  <label for="name">Product Name:</label>
+  <input type="text" id="name" [(ngModel)]="newProduct.name" name="name" required />
+
+  <label for="price">Price:</label>
+  <input type="number" id="price" [(ngModel)]="newProduct.price" name="price" required />
+
+  <button type="submit">Add Product</button>
+</form>
+<p *ngIf="message">{{ message }}</p>

@@ -1,0 +1,64 @@
+<!-- Display success message if update is successful -->
+<div *ngIf="successMessage" class="success-message">
+  {{ successMessage }}
+</div>
+
+<!-- Display error message if something goes wrong -->
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
+<div class="logout-container">
+  <button (click)="logout()" class="btn btn-danger">Logout</button>
+</div>
+<!-- User Details Table -->
+<h2>All Users Details</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td>
+        <!-- Edit button to select a user and open the edit modal -->
+        <button (click)="selectUser(user)" class="btn btn-primary">Edit</button>
+        <!-- Delete button to delete the user -->
+        <button (click)="deleteUser(user.id)" class="btn btn-danger btn-sm btn-spacing">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Edit User Modal -->
+<ng-template #editUserModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Update User Details</h5>
+    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" class="form-control" [(ngModel)]="selectedUser.username" name="username" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" class="form-control" [(ngModel)]="selectedUser.email" name="email" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" class="form-control" [(ngModel)]="selectedUser.password" name="password" />
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-success" (click)="updateUser()">Update</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
